@@ -1,0 +1,25 @@
+<h1>画像投稿フォーム</h1>
+<% if @post_image.errors.any? %>
+  <%= @post_image.errors.count %>件のエラーが発生しました
+  <% @post_image.errors.full_messages.each do |message| %>
+    <%= message %>
+  <% end %>
+<% end %>
+
+
+<%= form_with model: @post_image, local:true do |f| %>
+<!--form_withを利用して、post_images_path（/post_images）に画像をアップロード-->
+
+
+  <h4>画像</h4>
+  <%= f.attachment_field :image %>
+  <!--画像アップロードは、%= f.attachment_field :image %で実装-->
+  <!--指定するフィールド名は、image_idから_idを除いた名前（image）を指定-->
+  
+  
+  <h4>ショップ名</h4>
+  <%= f.text_field :shop_name %>
+  <h4>説明</h4>
+  <%= f.text_area :caption %>
+  <%= f.submit '投稿' %>
+<% end %>
